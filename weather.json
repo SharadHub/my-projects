@@ -1,0 +1,8 @@
+{
+    "city": "Kathmandu",
+    "country": "Nepal",
+    "temperature": 25,
+    "humidity": 70,
+    "windSpeed": 4.5,
+    "description": "partly cloudy"
+}
