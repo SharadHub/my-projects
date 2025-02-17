@@ -1,13 +1,16 @@
-function addTask() {
-    let taskInput = document.getElementById("taskInput");
-    let taskList = document.getElementById("taskList");
+function validateForm() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-    if (taskInput.value.trim() !== "") {
-        let li = document.createElement("li");
-        li.textContent = taskInput.value;
-        taskList.appendChild(li);
-        taskInput.value = "";
-    } else {
-        alert("Please enter a task!");
+    if (username.trim() === "" || password.trim() === "") {
+        alert("Username and password cannot be empty!");
+        return false;
     }
+    
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+    }
+
+    return true;
 }
