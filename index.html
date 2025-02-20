@@ -3,18 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Pixel Art Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        #colorPicker {
+            margin-right: 10px;
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            width: 320px;
+            height: 320px;
+            border: 2px solid #333;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+        .pixel {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ddd;
+            transition: background-color 0.2s;
+        }
+        .pixel:hover {
+            border-color: #aaa;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="app.php" method="POST" onsubmit="return validateForm()">
-            <input type="text" id="username" name="username" placeholder="Username" required>
-            <input type="password" id="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
+    <h1>Pixel Art Creator</h1>
+    <div class="controls">
+        <input type="color" id="colorPicker" value="#000000">
+        <button id="clearBtn">Clear</button>
     </div>
-    <script src="script.js"></script>
+    <div id="grid"></div>
+
+    <script>
+        function createGrid(size = 16) {
+            const container = document.getElementById("grid");
+            container.innerHTML = "";
+            container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+            for (let i = 0; i < size * size; i++) {
+                const pixel = document.createElement("div");
+                pixel.classList.add("pixel");
+                pixel.addEventListener("click", () => {
+                    pixel.style.backgroundColor = currentColor;
+                });
+                container.appendChild(pixel);
+            }
+        }
+
+        let currentColor = "#000000";
+        document.getElementById("colorPicker").addEventListener("input", (e) => {
+            currentColor = e.target.value;
+        });
+        document.getElementById("clearBtn").addEventListener("click", () => {
+            document.querySelectorAll(".pixel").forEach(pixel => {
+                pixel.style.backgroundColor = "#fff";
+            });
+        });
+
+        createGrid();
+    </script>
 </body>
 </html>
